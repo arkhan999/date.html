@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Will You Go On a Date With Me?</title>
+
+<style>
+    body {
+        background: linear-gradient(to bottom right, #ff758c, #ff7eb3);
+        font-family: 'Arial', sans-serif;
+        text-align: center;
+        height: 100vh;
+        overflow: hidden;
+        color: white;
+    }
+
+    h1 {
+        margin-top: 60px;
+        font-size: 40px;
+        text-shadow: 2px 2px 5px #ff4d6d;
+    }
+
+    .btn {
+        padding: 15px 30px;
+        font-size: 22px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        margin: 20px;
+        transition: 0.3s;
+    }
+
+    #yesBtn {
+        background-color: #ff4d6d;
+        color: white;
+    }
+
+    #noBtn {
+        background-color: #333;
+        color: white;
+        position: absolute;
+    }
+
+    #message {
+        font-size: 35px;
+        margin-top: 40px;
+        display: none;
+        animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+        from {opacity: 0;}
+        to {opacity: 1;}
+    }
+
+    /* Funny floating hearts */
+    .heart {
+        position: absolute;
+        color: #fff;
+        font-size: 25px;
+        animation: floatUp 4s linear infinite;
+    }
+
+    @keyframes floatUp {
+        0% {transform: translateY(0); opacity: 1;}
+        100% {transform: translateY(-200px); opacity: 0;}
+    }
+</style>
+</head>
+<body>
+
+<!-- Background Music -->
+<audio autoplay loop>
+    <source src="https://www.computerhope.com/jargon/m/example.mp3" type="audio/mpeg">
+</audio>
+
+<h1>💖 Will you go on a date with me? 💖</h1>
+
+<button id="yesBtn" class="btn">Yes</button>
+<button id="noBtn" class="btn">No</button>
+
+<div id="message">🎉 Congratulations! We are dating now! ❤️</div>
+
+<script>
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const message = document.getElementById("message");
+
+    // Make hearts appear randomly
+    function createHeart() {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML = "❤️";
+        heart.style.left = Math.random() * window.innerWidth + "px";
+        heart.style.top = window.innerHeight + "px";
+        document.body.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 4000);
+    }
+    setInterval(createHeart, 500);
+
+    // Move the "No" button randomly (funny fast movement)
+    noBtn.addEventListener("mouseover", () => {
+        const x = Math.random() * (window.innerWidth - 120);
+        const y = Math.random() * (window.innerHeight - 120);
+        noBtn.style.left = x + "px";
+        noBtn.style.top = y + "px";
+    });
+
+    // When "Yes" is clicked
+    yesBtn.addEventListener("click", () => {
+        message.style.display = "block";
+        yesBtn.style.display = "none";
+        noBtn.style.display = "none";
+    });
+</script>
+
+</body>
+</html>
