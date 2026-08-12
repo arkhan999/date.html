@@ -70,18 +70,14 @@
         to {opacity: 1;}
     }
 
-    /* Rose bouquet */
-    #rose {
-        width: 260px;
-        margin-top: 20px;
+    /* Megha name style */
+    #meghaName {
+        font-size: 32px;
+        margin-top: 10px;
         opacity: 0;
-        animation: rosePop 2s forwards;
-        filter: drop-shadow(0 0 20px #ff4d6d);
-    }
-
-    @keyframes rosePop {
-        0% { opacity: 0; transform: scale(0.5); }
-        100% { opacity: 1; transform: scale(1); }
+        animation: fadeIn 2s forwards;
+        color: #fff;
+        text-shadow: 0 0 15px #ff4d6d;
     }
 
     /* Floating hearts */
@@ -119,23 +115,23 @@
     <source src="https://www.computerhope.com/jargon/m/example.mp3" type="audio/mpeg">
 </audio>
 
-<h1 id="title">💖 Will you go on a date with me? 💖</h1>
+<h1 id="title">💖 Megha, will you go on a date with me? 💖</h1>
 
 <button id="yesBtn" class="btn">Yes</button>
 <button id="noBtn" class="btn">No</button>
 
 <!-- Final message -->
-<div id="finalMessage" style="display:none;">🎉 Congratulations! We are dating now! ❤️</div>
+<div id="finalMessage" style="display:none;">🎉 Congratulations Megha! We are dating now! ❤️</div>
 
-<!-- Rose bouquet image -->
-<img id="rose" style="display:none;" src="https://i.imgur.com/3fJ1Z0P.png">
+<!-- Her name appears beautifully -->
+<div id="meghaName" style="display:none;">💗 Megha 💗</div>
 
 <script>
     const noBtn = document.getElementById("noBtn");
     const yesBtn = document.getElementById("yesBtn");
     const title = document.getElementById("title");
     const finalMessage = document.getElementById("finalMessage");
-    const rose = document.getElementById("rose");
+    const meghaName = document.getElementById("meghaName");
 
     // Floating hearts
     function createHeart() {
@@ -185,9 +181,9 @@
         yesBtn.style.display = "none";
         noBtn.style.display = "none";
 
-        // Show final message + rose bouquet
+        // Show final message + her name
         finalMessage.style.display = "block";
-        rose.style.display = "block";
+        meghaName.style.display = "block";
 
         // Trigger heart burst
         heartBurst();
