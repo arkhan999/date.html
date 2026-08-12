@@ -56,20 +56,7 @@
         position: absolute;
     }
 
-    /* Cute bear + shy animation */
-    #bear {
-        width: 220px;
-        margin-top: 20px;
-        opacity: 0;
-        animation: bearPop 2s forwards;
-        filter: drop-shadow(0 0 20px #ff4d6d);
-    }
-
-    @keyframes bearPop {
-        0% { opacity: 0; transform: scale(0.5); }
-        100% { opacity: 1; transform: scale(1); }
-    }
-
+    /* Final message */
     #finalMessage {
         font-size: 40px;
         margin-top: 20px;
@@ -96,6 +83,19 @@
         0% {transform: translateY(0); opacity: 1;}
         100% {transform: translateY(-250px); opacity: 0;}
     }
+
+    /* Second surprise animation: heart burst */
+    .burst-heart {
+        position: absolute;
+        font-size: 50px;
+        animation: burst 1.2s ease-out forwards;
+        opacity: 0;
+    }
+
+    @keyframes burst {
+        0% { transform: scale(0.2); opacity: 1; }
+        100% { transform: scale(2.5); opacity: 0; }
+    }
 </style>
 </head>
 <body>
@@ -110,18 +110,14 @@
 <button id="yesBtn" class="btn">Yes</button>
 <button id="noBtn" class="btn">No</button>
 
-<!-- Final message + bear (hidden until Yes is clicked) -->
+<!-- Final message -->
 <div id="finalMessage" style="display:none;">🎉 Congratulations! We are dating now! ❤️</div>
-
-<!-- Cute bear image -->
-<img id="bear" style="display:none;" src="https://i.imgur.com/3ZQ3ZQF.png">
 
 <script>
     const noBtn = document.getElementById("noBtn");
     const yesBtn = document.getElementById("yesBtn");
     const title = document.getElementById("title");
     const finalMessage = document.getElementById("finalMessage");
-    const bear = document.getElementById("bear");
 
     // Floating hearts
     function createHeart() {
@@ -145,6 +141,21 @@
         noBtn.style.top = y + "px";
     });
 
+    // Second surprise animation: heart burst
+    function heartBurst() {
+        for (let i = 0; i < 8; i++) {
+            const burst = document.createElement("div");
+            burst.classList.add("burst-heart");
+            burst.innerHTML = "💗";
+            burst.style.left = (window.innerWidth / 2) + "px";
+            burst.style.top = (window.innerHeight / 2) + "px";
+            burst.style.transform = `rotate(${i * 45}deg)`;
+            document.body.appendChild(burst);
+
+            setTimeout(() => burst.remove(), 1200);
+        }
+    }
+
     // When "Yes" is clicked
     yesBtn.addEventListener("click", () => {
 
@@ -156,9 +167,11 @@
         yesBtn.style.display = "none";
         noBtn.style.display = "none";
 
-        // Show final message + bear
+        // Show final message
         finalMessage.style.display = "block";
-        bear.style.display = "block";
+
+        // Trigger second surprise animation
+        heartBurst();
     });
 </script>
 
