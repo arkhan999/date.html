@@ -6,25 +6,32 @@
 
 <style>
     body {
-        background: linear-gradient(to bottom right, #ff758c, #ff7eb3);
+        background: linear-gradient(to bottom right, #ff9a9e, #fecfef);
         font-family: 'Arial', sans-serif;
         text-align: center;
         height: 100vh;
         overflow: hidden;
         color: white;
+        transition: background 1.5s ease-in-out;
     }
 
     h1 {
         margin-top: 60px;
-        font-size: 40px;
-        text-shadow: 2px 2px 5px #ff4d6d;
+        font-size: 45px;
+        text-shadow: 2px 2px 10px #ff4d6d;
+        animation: glow 2s infinite alternate;
+    }
+
+    @keyframes glow {
+        from { text-shadow: 0 0 10px #ff4d6d; }
+        to { text-shadow: 0 0 25px #ff1e56; }
     }
 
     .btn {
-        padding: 15px 30px;
-        font-size: 22px;
+        padding: 15px 35px;
+        font-size: 24px;
         border: none;
-        border-radius: 10px;
+        border-radius: 15px;
         cursor: pointer;
         margin: 20px;
         transition: 0.3s;
@@ -33,6 +40,14 @@
     #yesBtn {
         background-color: #ff4d6d;
         color: white;
+        box-shadow: 0 0 15px #ff4d6d;
+        animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+        100% { transform: scale(1); }
     }
 
     #noBtn {
@@ -41,11 +56,26 @@
         position: absolute;
     }
 
-    #message {
-        font-size: 35px;
-        margin-top: 40px;
-        display: none;
-        animation: fadeIn 1s ease-in-out;
+    /* Cute bear + shy animation */
+    #bear {
+        width: 200px;
+        margin-top: 20px;
+        opacity: 0;
+        animation: bearPop 2s forwards;
+        filter: drop-shadow(0 0 20px #ff4d6d);
+    }
+
+    @keyframes bearPop {
+        0% { opacity: 0; transform: scale(0.5); }
+        100% { opacity: 1; transform: scale(1); }
+    }
+
+    #finalMessage {
+        font-size: 40px;
+        margin-top: 20px;
+        opacity: 0;
+        animation: fadeIn 2s forwards;
+        text-shadow: 0 0 20px #ff4d6d;
     }
 
     @keyframes fadeIn {
@@ -53,17 +83,18 @@
         to {opacity: 1;}
     }
 
-    /* Funny floating hearts */
+    /* Floating hearts */
     .heart {
         position: absolute;
-        color: #fff;
-        font-size: 25px;
-        animation: floatUp 4s linear infinite;
+        color: #ffdde1;
+        font-size: 30px;
+        animation: floatUp 6s linear infinite;
+        filter: drop-shadow(0 0 10px #ff4d6d);
     }
 
     @keyframes floatUp {
         0% {transform: translateY(0); opacity: 1;}
-        100% {transform: translateY(-200px); opacity: 0;}
+        100% {transform: translateY(-250px); opacity: 0;}
     }
 </style>
 </head>
@@ -74,32 +105,39 @@
     <source src="https://www.computerhope.com/jargon/m/example.mp3" type="audio/mpeg">
 </audio>
 
-<h1>💖 Will you go on a date with me? 💖</h1>
+<h1 id="title">💖 Will you go on a date with me? 💖</h1>
 
 <button id="yesBtn" class="btn">Yes</button>
 <button id="noBtn" class="btn">No</button>
 
-<div id="message">🎉 Congratulations! We are dating now! ❤️</div>
+<!-- Final message + bear (hidden until Yes is clicked) -->
+<div id="finalMessage" style="display:none;">🎉 Congratulations! We are dating now! ❤️</div>
+
+<!-- Replace this image link with your own cute bear -->
+<img id="bear" style="display:none;" src="https://i.imgur.com/3ZQ3ZQF.png">
 
 <script>
     const noBtn = document.getElementById("noBtn");
     const yesBtn = document.getElementById("yesBtn");
-    const message = document.getElementById("message");
+    const title = document.getElementById("title");
+    const finalMessage = document.getElementById("finalMessage");
+    const bear = document.getElementById("bear");
 
-    // Make hearts appear randomly
+    // Floating hearts
     function createHeart() {
         const heart = document.createElement("div");
         heart.classList.add("heart");
         heart.innerHTML = "❤️";
         heart.style.left = Math.random() * window.innerWidth + "px";
         heart.style.top = window.innerHeight + "px";
+        heart.style.fontSize = (Math.random() * 20 + 20) + "px";
         document.body.appendChild(heart);
 
-        setTimeout(() => heart.remove(), 4000);
+        setTimeout(() => heart.remove(), 6000);
     }
-    setInterval(createHeart, 500);
+    setInterval(createHeart, 400);
 
-    // Move the "No" button randomly (funny fast movement)
+    // Move the "No" button randomly
     noBtn.addEventListener("mouseover", () => {
         const x = Math.random() * (window.innerWidth - 120);
         const y = Math.random() * (window.innerHeight - 120);
@@ -109,9 +147,18 @@
 
     // When "Yes" is clicked
     yesBtn.addEventListener("click", () => {
-        message.style.display = "block";
+
+        // Change background
+        document.body.style.background = "linear-gradient(to bottom right, #ffb6c1, #ffd1dc)";
+
+        // Hide everything
+        title.style.display = "none";
         yesBtn.style.display = "none";
         noBtn.style.display = "none";
+
+        // Show final message + bear
+        finalMessage.style.display = "block";
+        bear.style.display = "block";
     });
 </script>
 
