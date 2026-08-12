@@ -70,6 +70,20 @@
         to {opacity: 1;}
     }
 
+    /* Rose bouquet */
+    #rose {
+        width: 260px;
+        margin-top: 20px;
+        opacity: 0;
+        animation: rosePop 2s forwards;
+        filter: drop-shadow(0 0 20px #ff4d6d);
+    }
+
+    @keyframes rosePop {
+        0% { opacity: 0; transform: scale(0.5); }
+        100% { opacity: 1; transform: scale(1); }
+    }
+
     /* Floating hearts */
     .heart {
         position: absolute;
@@ -84,7 +98,7 @@
         100% {transform: translateY(-250px); opacity: 0;}
     }
 
-    /* Second surprise animation: heart burst */
+    /* Heart burst surprise */
     .burst-heart {
         position: absolute;
         font-size: 50px;
@@ -113,11 +127,15 @@
 <!-- Final message -->
 <div id="finalMessage" style="display:none;">🎉 Congratulations! We are dating now! ❤️</div>
 
+<!-- Rose bouquet image -->
+<img id="rose" style="display:none;" src="https://i.imgur.com/3ZQ3ZQF.png">
+
 <script>
     const noBtn = document.getElementById("noBtn");
     const yesBtn = document.getElementById("yesBtn");
     const title = document.getElementById("title");
     const finalMessage = document.getElementById("finalMessage");
+    const rose = document.getElementById("rose");
 
     // Floating hearts
     function createHeart() {
@@ -141,7 +159,7 @@
         noBtn.style.top = y + "px";
     });
 
-    // Second surprise animation: heart burst
+    // Heart burst animation
     function heartBurst() {
         for (let i = 0; i < 8; i++) {
             const burst = document.createElement("div");
@@ -167,10 +185,11 @@
         yesBtn.style.display = "none";
         noBtn.style.display = "none";
 
-        // Show final message
+        // Show final message + rose bouquet
         finalMessage.style.display = "block";
+        rose.style.display = "block";
 
-        // Trigger second surprise animation
+        // Trigger heart burst
         heartBurst();
     });
 </script>
