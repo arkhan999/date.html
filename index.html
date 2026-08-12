@@ -70,8 +70,8 @@
         to {opacity: 1;}
     }
 
-    /* Sparkling Megha name */
-    #meghaName {
+    /* Sparkling Samah name */
+    #samahName {
         font-size: 38px;
         margin-top: 20px;
         opacity: 0;
@@ -125,23 +125,23 @@
     <source src="https://filesamples.com/samples/audio/mp3/sample1.mp3" type="audio/mpeg">
 </audio>
 
-<h1 id="title">💖 Megha, will you go on a date with me? 💖</h1>
+<h1 id="title">💖 Samah, will you go on a date with me? 💖</h1>
 
 <button id="yesBtn" class="btn">Yes</button>
 <button id="noBtn" class="btn">No</button>
 
 <!-- Final message -->
-<div id="finalMessage" style="display:none;">🎉 Yey Megha! We are dating now 😍❤️</div>
+<div id="finalMessage" style="display:none;">🎉 Yey Samah! We are dating now 😍❤️</div>
 
 <!-- Sparkling name -->
-<div id="meghaName" style="display:none;">💗 Megha 💗</div>
+<div id="samahName" style="display:none;">💗 Samah 💗</div>
 
 <script>
     const noBtn = document.getElementById("noBtn");
     const yesBtn = document.getElementById("yesBtn");
     const title = document.getElementById("title");
     const finalMessage = document.getElementById("finalMessage");
-    const meghaName = document.getElementById("meghaName");
+    const samahName = document.getElementById("samahName");
 
     const seriousMusic = document.getElementById("seriousMusic");
     const happyMusic = document.getElementById("happyMusic");
@@ -160,23 +160,17 @@
     }
     setInterval(createHeart, 400);
 
-    // Move the "No" button randomly
-   function moveNoBtn() {
-    const x = Math.random() * (window.innerWidth - 120);
-    const y = Math.random() * (window.innerHeight - 120);
-    noBtn.style.left = x + "px";
-    noBtn.style.top = y + "px";
-}
+    // Move No button EVERY TIME (mobile + desktop)
+    function moveNoBtn() {
+        const x = Math.random() * (window.innerWidth - 120);
+        const y = Math.random() * (window.innerHeight - 120);
+        noBtn.style.left = x + "px";
+        noBtn.style.top = y + "px";
+    }
 
-// Desktop hover
-noBtn.addEventListener("mouseover", moveNoBtn);
-
-// Mobile tap
-noBtn.addEventListener("touchstart", moveNoBtn);
-
-// Click (extra safety)
-noBtn.addEventListener("click", moveNoBtn);
-
+    noBtn.addEventListener("mouseover", moveNoBtn);
+    noBtn.addEventListener("touchstart", moveNoBtn);
+    noBtn.addEventListener("click", moveNoBtn);
 
     // Heart burst animation
     function heartBurst() {
@@ -193,7 +187,7 @@ noBtn.addEventListener("click", moveNoBtn);
         }
     }
 
-    // When "Yes" is clicked
+    // When Yes is clicked
     yesBtn.addEventListener("click", () => {
 
         // Switch music
@@ -210,7 +204,7 @@ noBtn.addEventListener("click", moveNoBtn);
 
         // Show final message + sparkling name
         finalMessage.style.display = "block";
-        meghaName.style.display = "block";
+        samahName.style.display = "block";
 
         // Trigger heart burst
         heartBurst();
