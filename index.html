@@ -53,15 +53,16 @@
     #noBtn {
         background-color: #333;
         color: white;
+        position: absolute;
     }
 
+    /* Final message */
     #finalMessage {
         font-size: 45px;
         margin-top: 120px;
         opacity: 0;
         animation: fadeIn 2s forwards;
         text-shadow: 0 0 25px #ff4d6d;
-        display: none;
     }
 
     @keyframes fadeIn {
@@ -69,6 +70,7 @@
         to {opacity: 1;}
     }
 
+    /* Sparkling Samah name */
     #samahName {
         font-size: 38px;
         margin-top: 20px;
@@ -76,7 +78,6 @@
         animation: sparkle 2s infinite alternate, fadeIn 2s forwards;
         color: #fff;
         text-shadow: 0 0 20px #ff1e56, 0 0 30px #ff4d6d;
-        display: none;
     }
 
     @keyframes sparkle {
@@ -84,6 +85,7 @@
         100% { text-shadow: 0 0 25px #ffffff; }
     }
 
+    /* Floating hearts */
     .heart {
         position: absolute;
         color: #ffdde1;
@@ -97,6 +99,7 @@
         100% {transform: translateY(-250px); opacity: 0;}
     }
 
+    /* Heart burst surprise */
     .burst-heart {
         position: absolute;
         font-size: 50px;
@@ -112,10 +115,12 @@
 </head>
 <body>
 
+<!-- Serious tone (before Yes) -->
 <audio id="seriousMusic" autoplay loop>
     <source src="https://www.computerhope.com/jargon/m/example.mp3" type="audio/mpeg">
 </audio>
 
+<!-- Happy romantic tone (after Yes) -->
 <audio id="happyMusic" loop>
     <source src="https://filesamples.com/samples/audio/mp3/sample1.mp3" type="audio/mpeg">
 </audio>
@@ -125,12 +130,15 @@
 <button id="yesBtn" class="btn">Yes</button>
 <button id="noBtn" class="btn">No</button>
 
-<div id="finalMessage">🎉 Yey Samah! We are dating now 😍❤️</div>
-<div id="samahName">💗 Samah 💗</div>
+<!-- Final message -->
+<div id="finalMessage" style="display:none;">🎉 Yey Samah! We are dating now 😍❤️</div>
+
+<!-- Sparkling name -->
+<div id="samahName" style="display:none;">💗 Samah 💗</div>
 
 <script>
-    const yesBtn = document.getElementById("yesBtn");
     const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
     const title = document.getElementById("title");
     const finalMessage = document.getElementById("finalMessage");
     const samahName = document.getElementById("samahName");
@@ -138,6 +146,7 @@
     const seriousMusic = document.getElementById("seriousMusic");
     const happyMusic = document.getElementById("happyMusic");
 
+    // Floating hearts
     function createHeart() {
         const heart = document.createElement("div");
         heart.classList.add("heart");
@@ -151,6 +160,19 @@
     }
     setInterval(createHeart, 400);
 
+    // Move No button EVERY TIME (mobile + desktop)
+    function moveNoBtn() {
+        const x = Math.random() * (window.innerWidth - 120);
+        const y = Math.random() * (window.innerHeight - 120);
+        noBtn.style.left = x + "px";
+        noBtn.style.top = y + "px";
+    }
+
+    noBtn.addEventListener("mouseover", moveNoBtn);
+    noBtn.addEventListener("touchstart", moveNoBtn);
+    noBtn.addEventListener("click", moveNoBtn);
+
+    // Heart burst animation
     function heartBurst() {
         for (let i = 0; i < 8; i++) {
             const burst = document.createElement("div");
@@ -165,19 +187,26 @@
         }
     }
 
+    // When Yes is clicked
     yesBtn.addEventListener("click", () => {
+
+        // Switch music
         seriousMusic.pause();
         happyMusic.play();
 
+        // Change background
         document.body.style.background = "linear-gradient(to bottom right, #ffb6c1, #ffd1dc)";
 
+        // Hide everything
         title.style.display = "none";
         yesBtn.style.display = "none";
         noBtn.style.display = "none";
 
+        // Show final message + sparkling name
         finalMessage.style.display = "block";
         samahName.style.display = "block";
 
+        // Trigger heart burst
         heartBurst();
     });
 </script>
